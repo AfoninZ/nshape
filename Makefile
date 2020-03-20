@@ -30,4 +30,4 @@ run: nshape.bin
 	$(AS) $(AS_FLAGS) $< -o $@
 
 clean:
-	rm -rf $(OBJ_FILES)
+	rm -rf $(OBJ_FILES) build/*

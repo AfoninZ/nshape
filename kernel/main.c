@@ -1,6 +1,8 @@
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
 #include "cpu/isr.h"
+#include "cpu/irq.h"
+
 #include "drivers/vga_text.h"
 #include "drivers/serial.h"
 
@@ -17,7 +19,10 @@ void k_main(void)
 	idt_init();
 	print_ok("Loaded IDT.");
 	isr_init();
-	print_ok("Loaded ISR.");
+	print_ok("Loaded ISRs.");
+	irq_init();
+	print_ok("Loaded IRQs.");
+	__asm__ __volatile__ ("sti"); 
 	//serial_init();
 	vga_print("\nWelcome to nShape!\n");
 	for (char i = 0; i < 8; i++)
