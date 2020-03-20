@@ -7,10 +7,10 @@ OBJ_FILES = $(patsubst %.s,%.o,$(ASM_FILES)) $(patsubst %.c,%.o,$(SRC_FILES))
 AS = nasm
 AS_FLAGS = -felf32
 
-СС = i386-elf-gcc
+СС = i686-elf-gcc
 CC_FLAGS = -std=gnu99 -ffreestanding -c
 
-LD = i386-elf-ld
+LD = i686-elf-ld
 LD_FLAGS = -T linker.ld
 
 all: nshape.bin
@@ -24,7 +24,7 @@ run: nshape.bin
 	
 
 %.o: %.c
-	i386-elf-gcc $(CC_FLAGS) $< -o $@
+	i686-elf-gcc $(CC_FLAGS) $< -o $@
 
 %.o: %.s
 	$(AS) $(AS_FLAGS) $< -o $@

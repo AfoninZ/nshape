@@ -1,5 +1,6 @@
 #include "cpu/gdt.h"
 #include "cpu/idt.h"
+#include "cpu/isr.h"
 #include "drivers/vga_text.h"
 #include "drivers/serial.h"
 
@@ -12,11 +13,13 @@ void k_main(void)
 {
 	vga_init(0x07);
 	gdt_init();
-	vga_print("[  OK  -> Loaded GDT.\n");
+	print_ok("Loaded GDT.");
 	idt_init();
-	vga_print("[  OK  -> Loaded IDT.\n");
+	print_ok("Loaded IDT.");
+	isr_init();
+	print_ok("Loaded ISR.");
 	//serial_init();
-	vga_print("Welcome to nShape!\n");
+	vga_print("\nWelcome to nShape!\n");
 	for (char i = 0; i < 8; i++)
 	{
 		vga_setcolor((char) i << 4 | (i + 8));
@@ -28,4 +31,15 @@ void k_main(void)
 		vga_setcolor((char) i << 4 | (i - 8));
 		vga_print("OS");
 	}
+}
+
+void print_ok(char* msg)
+{
+	vga_print("-");
+	vga_setcolor(0x0A);
+	vga_print(" OK ");
+	vga_setcolor(0x07);
+	vga_print("-> ");
+	vga_print(msg);
+	vga_put('\n');
 }
