@@ -4,6 +4,7 @@
 #include "cpu/irq.h"
 
 #include "drivers/timer.h"
+#include "drivers/keyboard.h"
 #include "drivers/vga_text.h"
 #include "drivers/serial.h"
 
@@ -27,6 +28,7 @@ void k_main(void)
 	//serial_init();
 	vga_print("\nWelcome to nShape!\n");
 	timer_init();
+	keyboard_init();
 	for (char i = 0; i < 8; i++)
 	{
 		vga_setcolor((char) i << 4 | (i + 8));
